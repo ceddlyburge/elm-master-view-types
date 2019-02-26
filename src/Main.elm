@@ -7,14 +7,19 @@ import Html.Attributes exposing (src)
 
 ---- MODEL ----
 
+type View
+    = Home
+    | Article
+    | Viewer
 
 type alias Model =
-    {}
+    { view: View
+    }
 
 
 init : ( Model, Cmd Msg )
 init =
-    ( {}, Cmd.none )
+    ( Model Home, Cmd.none )
 
 
 
@@ -22,7 +27,7 @@ init =
 
 
 type Msg
-    = NoOp
+    = ShowView View
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
