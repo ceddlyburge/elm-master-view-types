@@ -7,13 +7,13 @@ import Html.Attributes exposing (src)
 
 ---- MODEL ----
 
-type View
+type Route
     = Home
     | Article
     | Viewer
 
 type alias Model =
-    { view: View
+    { route: Route
     }
 
 
@@ -27,12 +27,14 @@ init =
 
 
 type Msg
-    = ShowView View
+    = ShowRoute Route
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg model =
-    ( model, Cmd.none )
+    case msg of
+        ShowRoute route ->
+            ( { model | route = route }, Cmd.none )
 
 
 
@@ -41,11 +43,22 @@ update msg model =
 
 view : Model -> Html Msg
 view model =
-    div []
-        [ img [ src "/logo.svg" ] []
-        , h1 [] [ text "Your Elm App is working!" ]
-        ]
-
+    case model.route of
+        Home ->
+            div []
+                [ img [ src "/logo.svg" ] []
+                , h1 [] [ text "Your Elm App is working!" ]
+                ]
+        Article ->
+            div []
+                [ img [ src "/logo.svg" ] []
+                , h1 [] [ text "Your Elm App is working!" ]
+                ]
+        Viewer ->
+            div []
+                [ img [ src "/logo.svg" ] []
+                , h1 [] [ text "Your Elm App is working!" ]
+                ]
 
 
 ---- PROGRAM ----
