@@ -63,9 +63,10 @@ view model =
                 , h1 [] [ text "Your Elm App is working!" ]
                 ]
         Viewer ->
-            div []
-                [ img [ src "/logo.svg" ] []
-                , h1 [] [ text "Your Elm App is working!" ]
+            div 
+                []
+                [ viewHeader PageViewer
+                , viewerBanner
                 ]
 
 viewHeader : Page -> Html Msg
@@ -112,6 +113,27 @@ homeBanner =
             , p [] [ text "A place to share your knowledge." ]
             ]
         ]
+
+
+viewerBanner : Html Msg
+viewerBanner =
+    div 
+        [ class "profile-page" ]
+        [ div 
+            [ class "user-info" ]
+            [ div [ class "container" ]
+                [ div [ class "row" ]
+                    [ div [ class "col-xs-12 col-md-10 offset-md-1" ]
+                        [ img [ class "user-img", src "assets/images/smiley-cyrus.jpg" ] []
+                        , h4 [] [ text "gingerchicken" ]
+                        , p [] [ text "" ]
+                        --, followButton
+                        ]
+                    ]
+                ]
+            ]
+        ]
+
 
 ---- PROGRAM ----
 
