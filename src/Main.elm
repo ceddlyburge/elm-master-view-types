@@ -58,9 +58,10 @@ view model =
                 , homeBanner
                 ]
         Article ->
-            div []
-                [ img [ src "/logo.svg" ] []
-                , h1 [] [ text "Your Elm App is working!" ]
+            div 
+                []
+                [ viewHeader PageArticle
+                , articleBanner
                 ]
         Viewer ->
             div 
@@ -111,6 +112,30 @@ homeBanner =
         [ div [ class "container" ]
             [ h1 [ class "logo-font" ] [ text "conduit" ]
             , p [] [ text "A place to share your knowledge." ]
+            ]
+        ]
+
+
+articleBanner : Html Msg
+articleBanner =
+    div [ class "article-page" ]
+        [ div 
+            [ class "banner" ]
+            [ div [ class "container" ]
+                [ h1 [] [ text "How to train your dragon" ]
+                , div 
+                    [ class "article-meta" ]
+                    [ a 
+                        [ ]
+                        [ img [ src "assets/images/smiley-cyrus.jpg" ] [] ]
+                        , div [ class "info" ]
+                            [ a 
+                                [ class "author" ]
+                                [ text "melgenek5" ]
+                            , text "February 19, 2019"
+                            ]
+                    ]
+                ]
             ]
         ]
 
