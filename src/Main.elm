@@ -42,39 +42,33 @@ view model =
         Home ->
             div 
                 []
-                [ viewHeader Home
+                [ viewHeader homeNavBarLink
                 , homeBanner
                 ]
         Article ->
             div 
                 []
-                [ viewHeader Article
+                [ viewHeader articleNavBarLink
                 , articleBanner
                 ]
         Viewer ->
             div 
                 []
-                [ viewHeader Viewer
+                [ viewHeader viewerNavBarLink
                 , viewerBanner
                 ]
 
-viewHeader : Route -> Html Msg
-viewHeader route =
+viewHeader : NavBarLink -> Html Msg
+viewHeader activeNavBarLink =
     nav [ class "navbar navbar-light" ]
         [ div [ class "container" ]
             [ span [ class "navbar-brand" ]
                 [ text "conduit" ]
             , ul 
                 [ class "nav navbar-nav pull-xs-right" ]
-                (navBarLinksHtml <| navBarLinkForRoute route)
+                (navBarLinksHtml activeNavBarLink)
             ]
         ]
-
--- navbarLink : Page -> Route -> List (Html Msg) -> Html Msg
--- navbarLink page route linkContent =
---     li [ classList [ ( "nav-item", True ), ( "active", isActive page route ) ] ]
---     [ a [ class "nav-link", onClick (ShowRoute route) ] linkContent ]
-
 
 homeBanner : Html Msg
 homeBanner =

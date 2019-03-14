@@ -1,4 +1,4 @@
-module NavBarLink exposing (NavBarLink, homeNavBarLink, articleNavBarLink, viewerNavBarLink, navBarLinksHtml, navBarLinkForRoute)
+module NavBarLink exposing (NavBarLink, homeNavBarLink, articleNavBarLink, viewerNavBarLink, navBarLinksHtml)
 
 import Html exposing (..)
 import Html.Attributes exposing (src, class, classList)
@@ -26,19 +26,6 @@ navBarLinkHtml activeNavBarLink navBarLink =
                     , text linkText 
                 ]
             ]
-
-
-navBarLinkForRoute : Route -> NavBarLink
-navBarLinkForRoute route =
-    case ( route ) of
-        Home  ->
-            NavBarLink Route.Home "Home" ""
-
-        Viewer ->
-            NavBarLink Route.Viewer "\u{00A0}Viewer" "ion-gear-a"
-
-        Article ->
-            NavBarLink Route.Article "\u{00A0}Article" "ion-compose"
 
 
 homeNavBarLink : NavBarLink
