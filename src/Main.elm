@@ -19,10 +19,7 @@ init =
     ( Model Home, Cmd.none )
 
 
-
 ---- UPDATE ----
-
-
 
 
 update : Msg -> Model -> ( Model, Cmd Msg )
@@ -30,7 +27,6 @@ update msg model =
     case msg of
         ShowRoute route ->
             ( { model | route = route }, Cmd.none )
-
 
 
 ---- VIEW ----
