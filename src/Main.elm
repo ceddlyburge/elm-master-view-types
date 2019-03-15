@@ -6,6 +6,7 @@ import Html.Attributes exposing (src, class, classList)
 import Html.Events exposing (onClick)
 import Route exposing (..)
 import NavBarLink exposing (..)
+import Banner exposing (..)
 
 ---- MODEL ----
 
@@ -39,7 +40,7 @@ view model =
             div 
                 []
                 [ viewHeader homeNavBarLink
-                , homeBanner
+                , bannerHtml <| TextBanner <| TextBannerProperties "conduit" "A place to share your knowledge."
                 ]
         Article ->
             div 
