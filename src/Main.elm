@@ -46,13 +46,16 @@ view model =
             div 
                 []
                 [ viewHeader articleNavBarLink
-                , articleBanner
+                , bannerHtml <| 
+                    ArticleBanner 
+                        (Viewer2 "assets/images/smiley-cyrus.jpg" "ginger chicken")
+                        (ArticlePreview "How to train your dragon" "February 19, 2019")
                 ]
         Viewer ->
             div 
                 []
                 [ viewHeader viewerNavBarLink
-                , viewerBanner
+                , bannerHtml <| ViewerBanner <| Viewer2 "assets/images/smiley-cyrus.jpg" "ginger chicken"
                 ]
 
 viewHeader : NavBarLink -> Html Msg
@@ -66,60 +69,6 @@ viewHeader activeNavBarLink =
                 (navBarLinksHtml activeNavBarLink)
             ]
         ]
-
-homeBanner : Html Msg
-homeBanner =
-    div [ class "banner" ]
-        [ div [ class "container" ]
-            [ h1 [ class "logo-font" ] [ text "conduit" ]
-            , p [] [ text "A place to share your knowledge." ]
-            ]
-        ]
-
-
-articleBanner : Html Msg
-articleBanner =
-    div [ class "article-page" ]
-        [ div 
-            [ class "banner" ]
-            [ div [ class "container" ]
-                [ h1 [] [ text "How to train your dragon" ]
-                , div 
-                    [ class "article-meta" ]
-                    [ a 
-                        [ ]
-                        [ img [ src "assets/images/smiley-cyrus.jpg" ] [] ]
-                        , div [ class "info" ]
-                            [ a 
-                                [ class "author" ]
-                                [ text "melgenek5" ]
-                            , text "February 19, 2019"
-                            ]
-                    ]
-                ]
-            ]
-        ]
-
-
-viewerBanner : Html Msg
-viewerBanner =
-    div 
-        [ class "profile-page" ]
-        [ div 
-            [ class "user-info" ]
-            [ div [ class "container" ]
-                [ div [ class "row" ]
-                    [ div [ class "col-xs-12 col-md-10 offset-md-1" ]
-                        [ img [ class "user-img", src "assets/images/smiley-cyrus.jpg" ] []
-                        , h4 [] [ text "gingerchicken" ]
-                        , p [] [ text "" ]
-                        --, followButton
-                        ]
-                    ]
-                ]
-            ]
-        ]
-
 
 ---- PROGRAM ----
 

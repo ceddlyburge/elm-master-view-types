@@ -7,7 +7,8 @@ import Route exposing (..)
 
 type alias TextBannerProperties =
     { headline : String
-    , strapline : String}
+    , strapline : String 
+    }
 
 type alias Viewer2 =
     { avatar : String
