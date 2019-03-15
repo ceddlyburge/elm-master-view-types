@@ -2,11 +2,10 @@ module Main exposing (..)
 
 import Browser
 import Html exposing (..)
-import Html.Attributes exposing (src, class, classList)
-import Html.Events exposing (onClick)
 import Route exposing (..)
 import NavBarLink exposing (..)
 import Banner exposing (..)
+import Page exposing (..)
 
 ---- MODEL ----
 
@@ -32,43 +31,29 @@ update msg model =
 
 ---- VIEW ----
 
-
 view : Model -> Html Msg
 view model =
+    pageHtml <| page model
+
+page : Model -> Page2
+page model =
     case model.route of
         Home ->
-            div 
-                []
-                [ viewHeader homeNavBarLink
-                , bannerHtml <| TextBanner <| TextBannerProperties "conduit" "A place to share your knowledge."
-                ]
+            Page2
+                (TextBanner <| TextBannerProperties "conduit" "A place to share your knowledge.")
+                homeNavBarLink 
         Article ->
-            div 
-                []
-                [ viewHeader articleNavBarLink
-                , bannerHtml <| 
-                    ArticleBanner 
+            Page2
+                (ArticleBanner 
                         (Viewer2 "assets/images/smiley-cyrus.jpg" "ginger chicken")
                         (ArticlePreview "How to train your dragon" "February 19, 2019")
-                ]
+                )
+                articleNavBarLink
         Viewer ->
-            div 
-                []
-                [ viewHeader viewerNavBarLink
-                , bannerHtml <| ViewerBanner <| Viewer2 "assets/images/smiley-cyrus.jpg" "ginger chicken"
-                ]
-
-viewHeader : NavBarLink -> Html Msg
-viewHeader activeNavBarLink =
-    nav [ class "navbar navbar-light" ]
-        [ div [ class "container" ]
-            [ span [ class "navbar-brand" ]
-                [ text "conduit" ]
-            , ul 
-                [ class "nav navbar-nav pull-xs-right" ]
-                (navBarLinksHtml activeNavBarLink)
-            ]
-        ]
+            Page2 
+                (ViewerBanner <| Viewer2 "assets/images/smiley-cyrus.jpg" "ginger chicken")
+                viewerNavBarLink
+                
 
 ---- PROGRAM ----
 
