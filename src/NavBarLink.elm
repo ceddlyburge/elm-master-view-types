@@ -4,29 +4,30 @@ import Html exposing (..)
 import Html.Attributes exposing (src, class, classList)
 import Html.Events exposing (onClick)
 import Route exposing (..)
+import Msg exposing (..)
 
-type alias NavBarLinkProperties =
-    {    route: Route
+type alias NavBarLinkProperties msg =
+    {    msg: msg
         , linkText: String
         , linkClass: String
     }
 
-type NavBarLink =
-    NavBarLink NavBarLinkProperties
+type NavBarLink msg =
+    NavBarLink (NavBarLinkProperties msg)
 
-navBarLinksHtml : NavBarLink -> List (Html Msg)
+navBarLinksHtml : NavBarLink Msg -> List (Html Msg)
 navBarLinksHtml activeNavBarLink =
     List.map
         (navBarLinkHtml activeNavBarLink)
         [ homeNavBarLink, articleNavBarLink, viewerNavBarLink ]
 
-navBarLinkHtml : NavBarLink -> NavBarLink -> Html Msg
+navBarLinkHtml : NavBarLink Msg -> NavBarLink Msg -> Html Msg
 navBarLinkHtml activeNavBarLink navBarLink =
     case navBarLink of 
         NavBarLink navBarLinkProperties ->
             li [ classList [ ( "nav-item", True ), ( "active", navBarLink == activeNavBarLink ) ] ]
             [ a 
-                [ class "nav-link", onClick (ShowRoute navBarLinkProperties.route) ] 
+                [ class "nav-link", onClick navBarLinkProperties.msg ] 
                 [ 
                     i [ class navBarLinkProperties.linkClass ] []
                     , text navBarLinkProperties.linkText 
@@ -34,15 +35,15 @@ navBarLinkHtml activeNavBarLink navBarLink =
             ]
 
 
-homeNavBarLink : NavBarLink
+homeNavBarLink : NavBarLink Msg
 homeNavBarLink =
-    NavBarLink <| NavBarLinkProperties Route.Home "Home" ""
+    NavBarLink <| NavBarLinkProperties (ShowRoute Route.Home) "Home" ""
 
-articleNavBarLink : NavBarLink
+articleNavBarLink : NavBarLink Msg
 articleNavBarLink =
-    NavBarLink <| NavBarLinkProperties Route.Article "\u{00A0}Article" "ion-compose"
+    NavBarLink <| NavBarLinkProperties (ShowRoute Route.Article) "\u{00A0}Article" "ion-compose"
 
-viewerNavBarLink : NavBarLink
+viewerNavBarLink : NavBarLink Msg
 viewerNavBarLink =
-    NavBarLink <| NavBarLinkProperties Route.Viewer "\u{00A0}Viewer" "ion-gear-a"
+    NavBarLink <| NavBarLinkProperties (ShowRoute Route.Viewer) "\u{00A0}Viewer" "ion-gear-a"
 

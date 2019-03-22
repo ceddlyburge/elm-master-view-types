@@ -1,4 +1,4 @@
-module Page exposing (Page2, pageHtml)
+module Page exposing (Page, pageHtml)
 
 import Html exposing (..)
 import Html.Attributes exposing (src, class, classList)
@@ -6,13 +6,14 @@ import Html.Events exposing (onClick)
 import Route exposing (..)
 import NavBarLink exposing (..)
 import Banner exposing (..)
+import Msg exposing (..)
 
-type alias Page2 =
+type alias Page =
     { banner : Banner
-    , activeNavBarLink : NavBarLink 
+    , activeNavBarLink : NavBarLink Msg
     }
 
-pageHtml : Page2 ->  Html Msg
+pageHtml : Page ->  Html Msg
 pageHtml page = 
     div 
         []
@@ -20,7 +21,7 @@ pageHtml page =
         , bannerHtml page.banner
         ]
 
-viewHeader : NavBarLink -> Html Msg
+viewHeader : NavBarLink Msg -> Html Msg
 viewHeader activeNavBarLink =
     nav [ class "navbar navbar-light" ]
         [ div [ class "container" ]

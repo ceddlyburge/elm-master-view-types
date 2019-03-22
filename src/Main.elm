@@ -6,13 +6,13 @@ import Route exposing (..)
 import NavBarLink exposing (..)
 import Banner exposing (..)
 import Page exposing (..)
+import Msg exposing (..)
 
 ---- MODEL ----
 
 type alias Model =
     { route: Route
     }
-
 
 init : ( Model, Cmd Msg )
 init =
@@ -35,23 +35,23 @@ view : Model -> Html Msg
 view model =
     pageHtml <| page model
 
-page : Model -> Page2
+page : Model -> Page
 page model =
     case model.route of
         Home ->
-            Page2
+            Page
                 (TextBanner <| TextBannerProperties "conduit" "A place to share your knowledge.")
                 homeNavBarLink 
         Article ->
-            Page2
+            Page
                 (ArticleBanner 
-                        (Viewer2 "assets/images/smiley-cyrus.jpg" "ginger chicken")
+                        (Banner.Viewer "assets/images/smiley-cyrus.jpg" "ginger chicken")
                         (ArticlePreview "How to train your dragon" "February 19, 2019")
                 )
                 articleNavBarLink
-        Viewer ->
-            Page2 
-                (ViewerBanner <| Viewer2 "assets/images/smiley-cyrus.jpg" "ginger chicken")
+        Route.Viewer ->
+            Page 
+                (ViewerBanner <| Banner.Viewer "assets/images/smiley-cyrus.jpg" "ginger chicken")
                 viewerNavBarLink
                 
 

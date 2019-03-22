@@ -1,4 +1,4 @@
-module Banner exposing (Banner(..), TextBannerProperties, Viewer2, ArticlePreview, bannerHtml)
+module Banner exposing (Banner(..), TextBannerProperties, Viewer, ArticlePreview, bannerHtml)
 
 import Html exposing (..)
 import Html.Attributes exposing (src, class, classList)
@@ -10,7 +10,7 @@ type alias TextBannerProperties =
     , strapline : String 
     }
 
-type alias Viewer2 =
+type alias Viewer =
     { avatar : String
     , userName : String}
 
@@ -20,10 +20,10 @@ type alias ArticlePreview =
 
 type Banner =
     TextBanner TextBannerProperties
-    | ViewerBanner Viewer2
-    | ArticleBanner Viewer2 ArticlePreview
+    | ViewerBanner Viewer
+    | ArticleBanner Viewer ArticlePreview
 
-bannerHtml : Banner ->  Html Msg
+bannerHtml : Banner ->  Html msg
 bannerHtml banner = 
     case banner of 
         TextBanner textBannerProperties  ->
@@ -33,7 +33,7 @@ bannerHtml banner =
         ArticleBanner viewer articlePreview  ->
             articleBanner viewer articlePreview
 
-textBanner : TextBannerProperties -> Html Msg
+textBanner : TextBannerProperties -> Html msg
 textBanner textBannerProperties =
     div [ class "banner" ]
         [ div [ class "container" ]
@@ -42,7 +42,7 @@ textBanner textBannerProperties =
             ]
         ]
 
-viewerBanner : Viewer2 -> Html Msg
+viewerBanner : Viewer -> Html msg
 viewerBanner viewer =
     div 
         [ class "profile-page" ]
@@ -60,7 +60,7 @@ viewerBanner viewer =
             ]
         ]
 
-articleBanner : Viewer2 -> ArticlePreview -> Html Msg
+articleBanner : Viewer -> ArticlePreview -> Html msg
 articleBanner viewer articlePreview =
     div [ class "article-page" ]
         [ div 
