@@ -6,6 +6,17 @@ import Html.Events exposing (onClick)
 import Route exposing (..)
 import Msg exposing (..)
 
+-- NavBarLink is an opaque type, and can only be created using the exported function.
+-- This is a useful thing, and means that only supported instances can be created.
+-- The downside is that the creation functions (kind of) have to use the specific Msg
+-- type, instead of a generic parameter. This isn't completely required, but if you 
+-- didn't do it you could create an invalid instance which kind of defeats the point.
+-- The upshot of this, is that the pattern is good for use on a particular project,
+-- but cannot be shared across projects without refactoring. Which is probably what
+-- you want anyway, being as the creation functions are very likely to be project 
+-- specific.
+
+
 type alias NavBarLinkProperties msg =
     {    msg: msg
         , linkText: String
